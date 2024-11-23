@@ -156,73 +156,56 @@ function App() {
   }
   return (
     <div className="App">
-      {isSlnAvailable ?
+      <h1>Sudoku Solver</h1>
+      {isSlnAvailable ? (
         <div>
           <table>
-            <caption>Sudoku Answer </caption>
-            <colgroup>
-              <col />
-              <col />
-              <col />
-            </colgroup>
-            <colgroup>
-              <col />
-              <col />
-              <col />
-            </colgroup>
-            <colgroup>
-              <col />
-              <col />
-              <col />
-            </colgroup>
+            <caption>Sudoku Answer</caption>
             <tbody>
-              {slns?.map((a, i) =>
+              {slns?.map((row, i) => (
                 <tr key={i}>
-                  {
-                    a?.map((b, j) => <td key={j} style={datas[i][j] ? { backgroundColor: "green" } : null} >
-                      <input type="number" maxLength={1} disabled={datas[i][j]} onChange={(e) => handleSln(e, i, j)} value={slns[i][j]} style={{ width: "10px", height: "10px" }} />
-                    </td>)
-                  }
+                  {row?.map((value, j) => (
+                    <td key={j}>
+                      <input
+                        type="number"
+                        value={slns[i][j]}
+                        disabled={!!datas[i][j]}
+                        style={datas[i][j] ? { backgroundColor: "#d4edda" } : null}
+                      />
+                    </td>
+                  ))}
                 </tr>
-              )}
+              ))}
             </tbody>
           </table>
         </div>
-        : <table>
+      ) : (
+        <table>
           <caption>Sudoku Question</caption>
-          <colgroup>
-            <col />
-            <col />
-            <col />
-          </colgroup>
-          <colgroup>
-            <col />
-            <col />
-            <col />
-          </colgroup>
-          <colgroup>
-            <col />
-            <col />
-            <col />
-          </colgroup>
           <tbody>
-            {datas?.map((a, i) =>
+            {datas?.map((row, i) => (
               <tr key={i}>
-                {
-                  a?.map((b, j) => <td key={j}>
-                    <input type="number" maxLength={1} onChange={(e) => handleData(e, i, j)} value={datas[i][j]} style={{ width: "10px", height: "10px" }} />
-                  </td>)
-                }
+                {row?.map((value, j) => (
+                  <td key={j}>
+                    <input
+                      type="number"
+                      value={datas[i][j]}
+                      onChange={(e) => handleData(e, i, j)}
+                    />
+                  </td>
+                ))}
               </tr>
-            )}
+            ))}
           </tbody>
-        </table>}
-      <div> <button onClick={clearSudoko}>Clear</button>
-        <button onClick={switchView}>switch view</button>
+        </table>
+      )}
+      <div>
+        <button onClick={clearSudoko}>Clear</button>
+        <button onClick={switchView}>Switch View</button>
         <button onClick={generateSln}>Solve</button>
       </div>
       <div>{msg}</div>
-    </div >
+    </div>
   );
 }
 

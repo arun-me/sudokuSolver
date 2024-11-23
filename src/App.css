@@ -1,6 +1,12 @@
+/* Styling for the Sudoku table */
 table {
   border-collapse: collapse;
+  margin: auto;
   font-family: Calibri, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 colgroup,
@@ -10,25 +16,106 @@ tbody {
 
 td {
   border: solid thin;
-  height: 1.4em;
-  width: 1.4em;
+  height: 3rem;
+  /* Fixed height for uniform cells */
+  width: 3rem;
+  /* Fixed width for uniform cells */
   text-align: center;
   padding: 0;
+  position: relative;
+  /* To prevent overflow */
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+td:nth-child(3),
+td:nth-child(6) {
+  border-right: solid medium;
+}
+
+tr:nth-child(3) td,
+tr:nth-child(6) td {
+  border-bottom: solid medium;
+}
+
+input[type="number"] {
+  width: 95%;
+  /* Slightly smaller than the cell to avoid overflow */
+  height: 90%;
+  /* Adjust the height for a better fit */
+  border: none;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: transparent;
+  box-sizing: border-box;
+  /* Ensure padding does not exceed boundaries */
+  margin: auto;
+  /* Center align inside the cell */
+}
+
+input[type="number"]:disabled {
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: bold;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   margin: 0;
 }
 
 textarea:focus,
 input:focus {
   outline: none;
+  background-color: #f0f8ff;
 }
 
+/* Styling for the App container */
 .App {
-  padding: 1rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+button {
+  font-family: Calibri, sans-serif;
+  font-size: 1rem;
+  padding: 0.7rem 1.5rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: translateY(-2px);
+}
+
+button:active {
+  background-color: #0056b3;
+  transform: translateY(1px);
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+  table {
+    width: 90%;
+  }
+
+  td {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  input[type="number"] {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
 }
